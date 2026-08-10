@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Calculadora de Zona de Fresnel</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         ENCABEZADO
+    ====================================================== -->
+
+    <header class="encabezado">
+
+        <div class="marca">
+
+            <div class="marca-icono" aria-hidden="true">
+                📡
+            </div>
+
+            <div>
+                <h1>Calculadora de Zona de Fresnel</h1>
+
+                <p>
+                    Evaluación visual de radioenlaces
+                </p>
+            </div>
+
+        </div>
+
+        <nav class="menu-principal">
+
+            <button
+                id="boton-info"
+                class="boton-menu"
+                type="button"
+            >
+                ¿Qué es esto?
+            </button>
+
+            <button
+                id="boton-historial"
+                class="boton-menu"
+                type="button"
+            >
+                Historial
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="contenido-principal">
+
+        <!-- =================================================
+             PANEL DE DATOS
+        ================================================== -->
+
+        <section class="panel panel-datos">
+
+            <div class="titulo-seccion">
+
+                <span class="titulo-icono" aria-hidden="true">
+                    ⚙
+                </span>
+
+                <div>
+                    <h2>Datos del enlace</h2>
+
+                    <p>
+                        Ingresá los datos para evaluar la zona
+                        de Fresnel.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="formulario">
+
+                <!-- Distancia -->
+
+                <div class="grupo-campo">
+
+                    <label for="distancia">
+                        Distancia total
+                    </label>
+
+                    <div class="campo-con-unidad">
+
+                        <input
+                            id="distancia"
+                            type="text"
+                            inputmode="decimal"
+                            placeholder="Ejemplo: 10 o 10,5"
+                            autocomplete="off"
+                        >
+
+                        <span class="unidad">
+                            km
+                        </span>
+
+                    </div>
+
+                    <small>
+                        Distancia total entre las dos antenas.
+                    </small>
+
+                </div>
+
+
+                <!-- Frecuencia -->
+
+                <div class="grupo-campo">
+
+                    <label for="frecuencia">
+                        Frecuencia
+                    </label>
+
+                    <select id="frecuencia">
+
+                        <option value="0.9">
+                            0.9 GHz — Enlaces rurales
+                        </option>
+
+                        <option value="2.4" selected>
+                            2.4 GHz — Wi-Fi tradicional
+                        </option>
+
+                        <option value="5">
+                            5 GHz — Wi-Fi de alta velocidad
+                        </option>
+
+                        <option value="5.8">
+                            5.8 GHz — Radioenlaces
+                        </option>
+
+                        <option value="6">
+                            6 GHz — Wi-Fi 6E
+                        </option>
+
+                        <option value="24">
+                            24 GHz — Enlaces de corta distancia
+                        </option>
+
+                        <option value="otra">
+                            Otra frecuencia
+                        </option>
+
+                    </select>
+
+                    <p
+                        id="referencia-frecuencia"
+                        class="referencia-frecuencia"
+                    >
+                        Frecuencia habitual en hogares y comercios.
+                    </p>
+
+                </div>
+
+
+                <!-- Otra frecuencia -->
+
+                <div
+                    id="contenedor-otra-frecuencia"
+                    class="grupo-campo oculto"
+                >
+
+                    <label for="otra-frecuencia">
+                        Frecuencia personalizada
+                    </label>
+
+                    <div class="campo-con-unidad">
+
+                        <input
+                            id="otra-frecuencia"
+                            type="text"
+                            inputmode="decimal"
+                            placeholder="Ejemplo: 3,5"
+                            autocomplete="off"
+                        >
+
+                        <span class="unidad">
+                            GHz
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Altura de la antena A -->
+
+                <div class="grupo-campo">
+
+                    <label for="altura-antena-a">
+                        Altura de la antena A
+                    </label>
+
+                    <div class="campo-con-unidad">
+
+                        <input
+                            id="altura-antena-a"
+                            type="text"
+                            inputmode="decimal"
+                            placeholder="Ejemplo: 12"
+                            autocomplete="off"
+                        >
+
+                        <span class="unidad">
+                            m
+                        </span>
+
+                    </div>
+
+                    <small>
+                        Altura de la antena ubicada al inicio del enlace.
+                    </small>
+
+                </div>
+
+
+                <!-- Altura de la antena B -->
+
+                <div class="grupo-campo">
+
+                    <label for="altura-antena-b">
+                        Altura de la antena B
+                    </label>
+
+                    <div class="campo-con-unidad">
+
+                        <input
+                            id="altura-antena-b"
+                            type="text"
+                            inputmode="decimal"
+                            placeholder="Ejemplo: 18"
+                            autocomplete="off"
+                        >
+
+                        <span class="unidad">
+                            m
+                        </span>
+
+                    </div>
+
+                    <small>
+                        Altura de la antena ubicada al final del enlace.
+                    </small>
+
+                </div>
+
+
+                <!-- Altura del obstáculo -->
+
+                <div class="grupo-campo">
+
+                    <label for="altura-obstaculo">
+                        Altura del obstáculo
+                    </label>
+
+                    <div class="campo-con-unidad">
+
+                        <input
+                            id="altura-obstaculo"
+                            type="text"
+                            inputmode="decimal"
+                            placeholder="Ejemplo: 5"
+                            autocomplete="off"
+                        >
+
+                        <span class="unidad">
+                            m
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Posición del obstáculo -->
+
+                <div class="grupo-campo">
+
+                    <label for="posicion-obstaculo">
+                        Posición del obstáculo
+                    </label>
+
+                    <div class="campo-con-unidad">
+
+                        <input
+                            id="posicion-obstaculo"
+                            type="text"
+                            inputmode="decimal"
+                            placeholder="Ejemplo: 5"
+                            autocomplete="off"
+                        >
+
+                        <span class="unidad">
+                            km
+                        </span>
+
+                    </div>
+
+                    <small>
+                        Debe ser menor que la distancia total.
+                    </small>
+
+                </div>
+
+
+                <!-- Mensajes de validación -->
+
+                <div
+                    id="mensaje-error"
+                    class="mensaje-error oculto"
+                    role="alert"
+                >
+                </div>
+
+
+                <!-- Botones -->
+
+                <div class="acciones-formulario">
+
+                    <button
+                        id="boton-calcular"
+                        class="boton boton-calcular"
+                        type="button"
+                    >
+                        <span aria-hidden="true">✓</span>
+                        Calcular
+                    </button>
+
+                    <button
+                        id="boton-limpiar"
+                        class="boton boton-limpiar"
+                        type="button"
+                    >
+                        Limpiar
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PANEL VISUAL Y RESULTADOS
+        ================================================== -->
+
+        <section class="panel panel-resultados">
+
+            <div class="titulo-seccion">
+
+                <span class="titulo-icono" aria-hidden="true">
+                    📊
+                </span>
+
+                <div>
+                    <h2>Evaluación del enlace</h2>
+
+                    <p>
+                        Resultado automático según los datos
+                        ingresados.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- Diagrama -->
+
+            <div class="escena-radioenlace">
+
+                <div class="cielo">
+
+                    <div class="sol"></div>
+
+                    <div class="nube nube-uno"></div>
+                    <div class="nube nube-dos"></div>
+
+                    <div class="montanas montanas-fondo"></div>
+                    <div class="montanas montanas-frente"></div>
+
+
+                    <!-- Antena izquierda -->
+
+                    <div class="antena antena-izquierda">
+
+                        <div class="plato"></div>
+
+                        <div class="torre">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <p>Antena A</p>
+
+                    </div>
+
+
+                    <!-- Zona de Fresnel -->
+
+                    <div
+                        id="zona-fresnel-visual"
+                        class="zona-fresnel"
+                    >
+                        <div class="linea-visual"></div>
+
+                        <span>
+                            Zona de Fresnel
+                        </span>
+                    </div>
+
+
+                    <!-- Obstáculo -->
+
+                    <div class="obstaculo">
+
+                        <div class="copa-arbol"></div>
+                        <div class="tronco"></div>
+
+                        <p>Obstáculo</p>
+
+                    </div>
+
+
+                    <!-- Antena derecha -->
+
+                    <div class="antena antena-derecha">
+
+                        <div class="plato"></div>
+
+                        <div class="torre">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <p>Antena B</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Tarjetas de resultados -->
+
+            <div class="grilla-resultados">
+
+                <article class="tarjeta-resultado">
+
+                    <span class="tarjeta-icono" aria-hidden="true">
+                        📡
+                    </span>
+
+                    <div>
+                        <p>Radio de Fresnel</p>
+
+                        <strong id="resultado-radio">
+                            -- m
+                        </strong>
+                    </div>
+
+                </article>
+
+
+                <article class="tarjeta-resultado">
+
+                    <span class="tarjeta-icono" aria-hidden="true">
+                        ✓
+                    </span>
+
+                    <div>
+                        <p>Despeje disponible</p>
+
+                        <strong id="resultado-zona-libre">
+                            -- %
+                        </strong>
+                    </div>
+
+                </article>
+
+
+                <article class="tarjeta-resultado">
+
+                    <span class="tarjeta-icono" aria-hidden="true">
+                        ⚠
+                    </span>
+
+                    <div>
+                        <p>Obstrucción</p>
+
+                        <strong id="resultado-impacto">
+                            -- %
+                        </strong>
+                    </div>
+
+                </article>
+
+
+                <article class="tarjeta-resultado">
+
+                    <span class="tarjeta-icono" aria-hidden="true">
+                        ↕
+                    </span>
+
+                    <div>
+                        <p>Elevación necesaria</p>
+
+                        <strong id="resultado-altura">
+                            -- m
+                        </strong>
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- Evaluación del despeje -->
+
+            <div
+                id="panel-estado"
+                class="panel-estado estado-espera"
+                aria-live="polite"
+            >
+
+                <div
+                    id="icono-estado"
+                    class="icono-estado"
+                    aria-hidden="true"
+                >
+                    …
+                </div>
+
+                <div class="contenido-estado">
+
+                    <p class="etiqueta-estado">
+                        Evaluación estimativa del enlace
+                    </p>
+
+                    <h3 id="texto-estado">
+                        Esperando datos
+                    </h3>
+
+                    <p id="descripcion-estado">
+                        Completá el formulario para comprobar si alcanza
+                        el despeje mínimo recomendado del 60 %.
+                    </p>
+
+
+                    <!-- Barra visual del despeje -->
+
+                    <div class="barra-despeje">
+
+                        <div
+                            id="progreso-despeje"
+                            class="progreso-despeje"
+                        >
+                        </div>
+
+                    </div>
+
+
+                    <div class="datos-progreso">
+
+                        <span id="texto-progreso">
+                            Despeje calculado: -- %
+                        </span>
+
+                        <span class="marca-minimo">
+                            Mínimo recomendado: 60 %
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         PIE DE PÁGINA
+    ====================================================== -->
+
+    <footer class="pie-pagina">
+
+        <p>
+            Creado por
+            <strong>Candela Picco</strong>
+        </p>
+
+        <span>
+            Tecnicatura Superior en Desarrollo de Software
+        </span>
+
+    </footer>
+
+
+    <!-- =====================================================
+         VENTANA: ¿QUÉ ES ESTO?
+    ====================================================== -->
+
+    <div
+        id="modal-info"
+        class="modal oculto"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="titulo-modal-info"
+    >
+
+        <div class="modal-contenido">
+
+            <button
+                id="cerrar-info"
+                class="boton-cerrar"
+                type="button"
+                aria-label="Cerrar"
+            >
+                ×
+            </button>
+
+            <div class="modal-icono" aria-hidden="true">
+                📡
+            </div>
+
+            <h2 id="titulo-modal-info">
+                ¿Qué es la zona de Fresnel?
+            </h2>
+
+            <p>
+                La zona de Fresnel es el espacio que rodea
+                la línea directa entre dos antenas. Los
+                obstáculos dentro de esta zona pueden reducir
+                la calidad de la señal.
+            </p>
+
+            <p>
+                Esta aplicación calcula la primera zona de
+                Fresnel con la fórmula:
+            </p>
+
+            <div class="formula">
+                F₁ = 8.656 × √(D / f)
+            </div>
+
+            <ul>
+                <li>
+                    <strong>D:</strong>
+                    distancia total en kilómetros.
+                </li>
+
+                <li>
+                    <strong>f:</strong>
+                    frecuencia en GHz.
+                </li>
+
+                <li>
+                    <strong>F₁:</strong>
+                    radio de Fresnel en metros.
+                </li>
+            </ul>
+
+
+            <h3>
+                ¿Cómo se evalúa el enlace?
+            </h3>
+
+            <p>
+                Después de calcular el radio de Fresnel, el
+                programa calcula la altura de la línea visual
+                entre la antena A y la antena B exactamente en
+                la posición donde se encuentra el obstáculo.
+            </p>
+
+            <p>
+                El enlace se considera técnicamente recomendable
+                cuando al menos el 60 % de la primera zona de
+                Fresnel permanece libre de obstáculos.
+            </p>
+
+            <p>
+                La evaluación admite antenas con distintas alturas
+                y utiliza la posición del obstáculo para determinar
+                el despeje disponible en ese punto del enlace.
+            </p>
+            <h3>
+    Significado de los resultados
+</h3>
+
+<p>
+    <strong>📡 Radio de Fresnel:</strong>
+    Es el radio de la primera Zona de Fresnel calculado para el enlace.
+    Representa el espacio que debería permanecer libre alrededor de la
+    línea visual entre las antenas para permitir una adecuada propagación
+    de la señal.
+</p>
+
+<p>
+    <strong>✅ Despeje disponible:</strong>
+    Es el porcentaje de la primera Zona de Fresnel que permanece libre
+    de obstáculos. Cuanto mayor sea este porcentaje, mejores serán las
+    condiciones para la transmisión de la señal.
+</p>
+
+<p>
+    <strong>⚠ Obstrucción:</strong>
+    Es el porcentaje de la primera Zona de Fresnel que se encuentra
+    ocupado por el obstáculo analizado. Un mayor porcentaje de
+    obstrucción puede afectar la calidad del radioenlace.
+</p>
+
+<p>
+    <strong>📈 Elevación necesaria:</strong>
+    Es la altura aproximada que deberían aumentarse las antenas para
+    alcanzar el despeje mínimo recomendado de la primera Zona de Fresnel,
+    en caso de que el enlace no cumpla con dicho requisito.
+</p>
+
+<p>
+    <strong>🟢 Estado del enlace:</strong>
+    Es el resultado final de la evaluación. Indica si el enlace cumple
+    o no con el despeje mínimo recomendado del 60 % de la primera Zona
+    de Fresnel.
+</p>
+
+            <button
+                id="entendido-info"
+                class="boton boton-calcular"
+                type="button"
+            >
+                Entendido
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         VENTANA: HISTORIAL
+    ====================================================== -->
+
+    <div
+        id="modal-historial"
+        class="modal oculto"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="titulo-historial"
+    >
+
+        <div class="modal-contenido modal-historial">
+
+            <button
+                id="cerrar-historial"
+                class="boton-cerrar"
+                type="button"
+                aria-label="Cerrar"
+            >
+                ×
+            </button>
+
+            <div class="encabezado-historial">
+
+                <div>
+                    <h2 id="titulo-historial">
+                        Historial de cálculos
+                    </h2>
+
+                    <p>
+                        Cálculos realizados durante esta sesión.
+                    </p>
+                </div>
+
+                <button
+                    id="borrar-historial"
+                    class="boton boton-peligro"
+                    type="button"
+                >
+                    Borrar historial
+                </button>
+
+            </div>
+
+
+            <div class="tabla-contenedor">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>N.º</th>
+                            <th>Distancia</th>
+                            <th>Frecuencia</th>
+                            <th>Radio</th>
+                            <th>Despeje</th>
+                            <th>Evaluación</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cuerpo-historial">
+
+                        <tr class="fila-vacia">
+                            <td colspan="6">
+                                Todavía no se realizaron cálculos.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="renderer.js"></script>
+
+</body>
+</html>
