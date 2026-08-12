@@ -214,6 +214,14 @@ function truncar(numero, decimales = 2) {
     return Math.trunc(numero * factor) / factor;
 }
 
+// Redondea hacia arriba para recomendaciones mínimas
+
+function redondearHaciaArriba(numero, decimales = 2) {
+    const factor = 10 ** decimales;
+
+    return Math.ceil(numero * factor) / factor;
+}
+
 
 // Muestra siempre dos decimales después de truncar
 
@@ -503,10 +511,10 @@ function actualizarResultados(datos) {
         );
 
     const alturaVisible =
-        mostrarDosDecimales(
-            datos.alturaRecomendada
-        );
-
+    redondearHaciaArriba(
+        datos.alturaRecomendada,
+        2
+    ).toFixed(2);
 
     // Tarjetas
 
@@ -593,11 +601,17 @@ function actualizarResultados(datos) {
         textoEstado.textContent =
             "NO CUMPLE EL DESPEJE MÍNIMO (60 %)";
 
+
+
         descripcionEstado.textContent =
-            `El enlace dispone de ${despejeVisible} % ` +
-            "de despeje. Se recomienda elevar las antenas " +
-            `hasta, como mínimo, ${alturaVisible} m.`;
+    `Se recomienda elevar las antenas hasta, como mínimo, ` +
+    `${alturaVisible} m. ` +
+    `También puede probar una frecuencia mayor para reducir ` +
+    `el radio de la Zona de Fresnel.`;
+
+
     }
+    
 }
 
 
